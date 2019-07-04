@@ -1,13 +1,28 @@
 import React from 'react';
-import { clearToken } from './auth/utils';
+import { clearToken, getToken } from './auth/utils';
 import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { logout } from './auth/api';
 
 function Layout(props) {
-  const { children } = props;
-  const logout = () => {
-    clearToken();
+  const { children, history } = props;
+  const handleLogout = () => {
+    const token = getToken();
+
+    logout(token)
+      .then(() => {
+        clearToken();
+        history.push('/login');
+      })
+      .catch(error => {
+        const message = error.response
+          ? error.response.data.message
+          : 'Terjadi kesalahan saat logout, silahkan coba lagi';
+
+        window.alert(message);
+      });
   };
+
   return (
     <Container fluid>
       <Row className="mt-3">
@@ -34,7 +49,7 @@ function Layout(props) {
             <ListGroupItem
               tag="a"
               href="#"
-              onClick={logout}
+              onClick={handleLogout}
               className="text-danger"
               action
             >

@@ -12,7 +12,7 @@ function ProtectedPage(props) {
   });
 
   return (
-    <Layout>
+    <Layout {...props}>
       <h2>Content</h2>
     </Layout>
   );
