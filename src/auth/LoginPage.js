@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Alert,
   Button,
   Container,
   Row,
@@ -10,20 +11,35 @@ import {
   Input
 } from 'reactstrap';
 
+import { login } from './api';
+import { saveToken } from './utils';
+
 function LoginPage(props) {
   const { history } = props;
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setError] = useState('');
 
+  const clearError = () => setError('');
   const handleChangeEmail = e => setEmail(e.target.value);
   const handleChangePassword = e => setPassword(e.target.value);
   const handleLogin = e => {
     e.preventDefault();
 
-    // TODO call api
-
-    history.push('/');
+    const payload = { email, password };
+    login(payload)
+      .then(response => {
+        const token = response.data.api_token;
+        saveToken(token);
+        history.push('/');
+      })
+      .catch(error => {
+        const message = error.response
+          ? error.response.data.message
+          : 'Login gagal';
+        setError(message);
+      });
   };
 
   return (
@@ -55,6 +71,9 @@ function LoginPage(props) {
                 required
               />
             </FormGroup>
+            <Alert color="danger" isOpen={!!errorMessage} toggle={clearError}>
+              {errorMessage}
+            </Alert>
             <Button color="primary">Submit</Button>
           </Form>
         </Col>
