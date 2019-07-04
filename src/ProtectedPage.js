@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { getToken } from './auth/utils';
 import Layout from './Layout';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import DashboardPage from './dashboard/DashboardPage';
+import SuppliersPage from './supplier/SuppliersPage';
 
 function ProtectedPage(props) {
   const { history } = props;
@@ -13,7 +16,11 @@ function ProtectedPage(props) {
 
   return (
     <Layout {...props}>
-      <h2>Content</h2>
+      <Switch>
+        <Route path="/suppliers" component={SuppliersPage} />
+        <Route exact path="/" component={DashboardPage} />
+        <Redirect to="/" />
+      </Switch>
     </Layout>
   );
 }
