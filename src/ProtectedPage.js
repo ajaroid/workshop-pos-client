@@ -4,6 +4,7 @@ import Layout from './Layout';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DashboardPage from './dashboard/DashboardPage';
 import SuppliersPage from './supplier/SuppliersPage';
+import SupplierCreatePage from './supplier/SupplierCreatePage';
 
 function ProtectedPage(props) {
   const { history } = props;
@@ -17,6 +18,7 @@ function ProtectedPage(props) {
   return (
     <Layout {...props}>
       <Switch>
+        <Route path="/suppliers/create" component={SupplierCreatePage} />
         <Route path="/suppliers" component={SuppliersPage} />
         <Route exact path="/" component={DashboardPage} />
         <Redirect to="/" />

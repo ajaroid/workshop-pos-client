@@ -10,5 +10,23 @@ export function getSuppliers(token, page = 1) {
       Accept: 'application/json',
       Authorization: `Bearer ${token}`
     }
-  })
+  });
+}
+
+export function postSupplier(token, payload) {
+  const { name, email, phone, address } = payload;
+  return axios({
+    method: 'POST',
+    url: `${baseUrl}/suppliers`,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    data: {
+      name,
+      email,
+      phone,
+      address
+    }
+  });
 }

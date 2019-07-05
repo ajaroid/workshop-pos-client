@@ -13,7 +13,7 @@ function SupplierList(props) {
             <th>Nama</th>
             <th>Email</th>
             <th>Alamat</th>
-            <th>Telpon</th>
+            <th>Telepon</th>
           </tr>
         </thead>
         <tbody>
