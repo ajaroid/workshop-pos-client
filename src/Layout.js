@@ -9,18 +9,11 @@ function Layout(props) {
   const handleLogout = () => {
     const token = getToken();
 
+    clearToken();
     logout(token)
-      .then(() => {
-        clearToken();
+      .finally(() => {
         history.push('/login');
       })
-      .catch(error => {
-        const message = error.response
-          ? error.response.data.message
-          : 'Terjadi kesalahan saat logout, silahkan coba lagi';
-
-        window.alert(message);
-      });
   };
 
   return (
