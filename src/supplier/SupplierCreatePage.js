@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { postSupplier } from './api';
-import { getToken } from '../utils';
+import { getToken, handleError } from '../utils';
 import toast from 'toasted-notes';
 
 function SupplierCreatePage(props) {
@@ -31,15 +31,7 @@ function SupplierCreatePage(props) {
         history.push('/suppliers');
       })
       .catch(error => {
-        const message = error.response
-          ? error.response.data.message
-          : 'Terjadi kesalahan, silahkan coba lagi';
-
-        toast.notify(({ onClose }) => (
-          <Alert color="danger" toggle={onClose}>
-            {message}
-          </Alert>
-        ));
+        handleError(error);
       });
   };
 
