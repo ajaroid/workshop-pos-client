@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Table } from 'reactstrap';
-import PurchaseProductItem from './PurchaseProductItem';
+import SaleProductItem from './SaleProductItem';
 
-function PurchaseProductList(props) {
+function SaleProductList(props) {
   const { items, onItemAdd, onItemQtyChange, onItemRemove } = props;
   return (
     <div className="table-responsive">
@@ -12,6 +12,7 @@ function PurchaseProductList(props) {
             <th />
             <th>ID</th>
             <th>Nama</th>
+            <th>Stok</th>
             <th>Jml</th>
             <th>Harga</th>
             <th>Subtotal</th>
@@ -19,7 +20,7 @@ function PurchaseProductList(props) {
         </thead>
         <tbody>
           {items.map(item => (
-            <PurchaseProductItem
+            <SaleProductItem
               key={item.product_id}
               item={item}
               onQtyChange={onItemQtyChange}
@@ -41,4 +42,4 @@ function PurchaseProductList(props) {
   );
 }
 
-export default PurchaseProductList;
+export default SaleProductList;
