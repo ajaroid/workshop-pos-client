@@ -4,7 +4,7 @@ import { getCategory, deleteCategory, putCategory } from './api';
 import { getToken, handleError } from '../utils';
 import toast from 'toasted-notes';
 
-function SupplierEditPage(props) {
+function CategoryEditPage(props) {
   const { match, history } = props;
   const { categoryId } = match.params;
 
@@ -106,4 +106,4 @@ function SupplierEditPage(props) {
   );
 }
 
-export default SupplierEditPage;
+export default CategoryEditPage;

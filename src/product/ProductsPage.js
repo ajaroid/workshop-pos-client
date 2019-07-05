@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PaginationComponent from 'react-reactstrap-pagination';
-import CategoryList from './components/CategoryList';
+import ProductList from './components/ProductList';
 import { getToken } from '../utils';
-import { getCategories } from './api';
+import { getProducts } from './api';
 import toast from 'toasted-notes';
 
-function CategoriesPage(props) {
+function ProductsPage(props) {
   const paginationState = {
     data: [],
     total: 0,
@@ -16,9 +16,9 @@ function CategoriesPage(props) {
   };
   const [pagination, setPagination] = useState(paginationState);
 
-  const fetchCategories = page => {
+  const fetchProducts = page => {
     const token = getToken();
-    getCategories(token, page)
+    getProducts(token, page)
       .then(response => {
         const { data, current_page, total, per_page } = response.data;
         setPagination({
@@ -40,32 +40,32 @@ function CategoriesPage(props) {
       });
   };
   const changePage = page => {
-    fetchCategories(page);
+    fetchProducts(page);
   };
 
   useEffect(() => {
-    fetchCategories(1);
+    fetchProducts(1);
   }, []);
 
   const gotoItem = item => {
     const { history } = props;
-    history.push(`/categories/${item.id}`);
+    history.push(`/products/${item.id}`);
   };
 
   return (
     <div>
-      <h2 className="mb-5">Kategori Produk</h2>
+      <h2 className="mb-5">Produk</h2>
 
       <Button
         tag={Link}
-        to="/categories/create"
+        to="/products/create"
         color="primary"
         className="mb-3"
       >
         Tambah
       </Button>
 
-      <CategoryList data={pagination.data} onItemSelected={gotoItem} />
+      <ProductList data={pagination.data} onItemSelected={gotoItem} />
 
       {pagination.total > pagination.perPage ? (
         <PaginationComponent
@@ -79,4 +79,4 @@ function CategoriesPage(props) {
   );
 }
 
-export default CategoriesPage;
+export default ProductsPage;
