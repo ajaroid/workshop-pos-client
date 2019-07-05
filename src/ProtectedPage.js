@@ -7,6 +7,10 @@ import SuppliersPage from './supplier/SuppliersPage';
 import SupplierCreatePage from './supplier/SupplierCreatePage';
 import SupplierEditPage from './supplier/SupplierEditPage';
 
+import CategoriesPage from './category/CategoriesPage';
+import CategoryCreatePage from './category/CategoryCreatePage';
+import CategoryEditPage from './category/CategoryEditPage';
+
 function ProtectedPage(props) {
   const { history } = props;
   useEffect(() => {
@@ -19,6 +23,10 @@ function ProtectedPage(props) {
   return (
     <Layout {...props}>
       <Switch>
+        <Route path="/categories/create" component={CategoryCreatePage} />
+        <Route path="/categories/:categoryId" component={CategoryEditPage} />
+        <Route path="/categories" component={CategoriesPage} />
+
         <Route path="/suppliers/create" component={SupplierCreatePage} />
         <Route path="/suppliers/:supplierId" component={SupplierEditPage} />
         <Route path="/suppliers" component={SuppliersPage} />

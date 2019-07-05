@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Alert, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PaginationComponent from 'react-reactstrap-pagination';
-import SupplierList from './components/SupplierList';
+import CategoryList from './components/CategoryList';
 import { getToken } from '../utils';
-import { getSuppliers } from './api';
+import { getCategories } from './api';
 import toast from 'toasted-notes';
 
-function SuppliersPage(props) {
+function CategoriesPage(props) {
   const paginationState = {
     data: [],
     total: 0,
@@ -18,7 +18,7 @@ function SuppliersPage(props) {
 
   const fetchSuppliers = page => {
     const token = getToken();
-    getSuppliers(token, page)
+    getCategories(token, page)
       .then(response => {
         const { data, current_page, total, per_page } = response.data;
         setPagination({
@@ -49,23 +49,23 @@ function SuppliersPage(props) {
 
   const gotoItem = item => {
     const { history } = props;
-    history.push(`/suppliers/${item.id}`);
+    history.push(`/categories/${item.id}`);
   };
 
   return (
     <div>
-      <h2 className="mb-5">Supplier</h2>
+      <h2 className="mb-5">Kategori Produk</h2>
 
       <Button
         tag={Link}
-        to="/suppliers/create"
+        to="/categories/create"
         color="primary"
         className="mb-3"
       >
         Tambah
       </Button>
 
-      <SupplierList data={pagination.data} onItemSelected={gotoItem} />
+      <CategoryList data={pagination.data} onItemSelected={gotoItem} />
 
       {pagination.total > pagination.perPage ? (
         <PaginationComponent
@@ -79,4 +79,4 @@ function SuppliersPage(props) {
   );
 }
 
-export default SuppliersPage;
+export default CategoriesPage;

@@ -10,10 +10,9 @@ function Layout(props) {
     const token = getToken();
 
     clearToken();
-    logout(token)
-      .finally(() => {
-        history.push('/login');
-      })
+    logout(token).finally(() => {
+      history.push('/login');
+    });
   };
 
   return (
@@ -51,7 +50,14 @@ function Layout(props) {
           </ListGroup>
         </Col>
 
-        <Col>{children}</Col>
+        <Col
+          style={{
+            minHeight: 500,
+            paddingBottom: 100
+          }}
+        >
+          {children}
+        </Col>
       </Row>
     </Container>
   );
