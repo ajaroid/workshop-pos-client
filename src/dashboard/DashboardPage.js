@@ -2,7 +2,7 @@ import React from 'react';
 
 function DashboardPage() {
   return (
-    <h2 classsName="mb-5">Dashboard</h2>
+    <h2 className="mb-5">Dashboard</h2>
   );
 }
 

@@ -10,6 +10,7 @@ import {
   Label,
   Input
 } from 'reactstrap';
+import toast from 'toasted-notes';
 
 import { login } from './api';
 import { saveToken } from './utils';
@@ -19,9 +20,7 @@ function LoginPage(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setError] = useState('');
 
-  const clearError = () => setError('');
   const handleChangeEmail = e => setEmail(e.target.value);
   const handleChangePassword = e => setPassword(e.target.value);
   const handleLogin = e => {
@@ -38,7 +37,12 @@ function LoginPage(props) {
         const message = error.response
           ? error.response.data.message
           : 'Login gagal';
-        setError(message);
+
+        toast.notify(({ onClose }) => (
+          <Alert color="danger" toggle={onClose}>
+            {message}
+          </Alert>
+        ))
       });
   };
 
@@ -71,9 +75,6 @@ function LoginPage(props) {
                 required
               />
             </FormGroup>
-            <Alert color="danger" isOpen={!!errorMessage} toggle={clearError}>
-              {errorMessage}
-            </Alert>
             <Button color="primary">Submit</Button>
           </Form>
         </Col>

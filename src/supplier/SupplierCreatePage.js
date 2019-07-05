@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { postSupplier } from './api';
 import { getToken } from '../auth/utils';
+import toast from 'toasted-notes';
 
 function SupplierCreatePage(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-
-  const [errorMessage, setError] = useState('');
-  const clearError = () => setError('');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,14 +23,23 @@ function SupplierCreatePage(props) {
     postSupplier(token, payload)
       .then(response => {
         const { history } = props;
-        window.alert('Berhasil tambah data');
+        toast.notify(({ onClose }) => (
+          <Alert color="success" toggle={onClose}>
+            Berhasil tambah data
+          </Alert>
+        ));
         history.push('/suppliers');
       })
       .catch(error => {
         const message = error.response
           ? error.response.data.message
           : 'Terjadi kesalahan, silahkan coba lagi';
-        setError(message);
+
+        toast.notify(({ onClose }) => (
+          <Alert color="danger" toggle={onClose}>
+            {message}
+          </Alert>
+        ));
       });
   };
 
@@ -74,9 +81,6 @@ function SupplierCreatePage(props) {
             required
           />
         </FormGroup>
-        <Alert color="danger" isOpen={!!errorMessage} toggle={clearError}>
-          {errorMessage}
-        </Alert>
         <Button color="primary">Simpan</Button>
       </Form>
     </div>

@@ -5,6 +5,7 @@ import PaginationComponent from 'react-reactstrap-pagination';
 import SupplierList from './components/SupplierList';
 import { getToken } from '../auth/utils';
 import { getSuppliers } from './api';
+import toast from 'toasted-notes';
 
 function SuppliersPage(props) {
   const paginationState = {
@@ -14,9 +15,6 @@ function SuppliersPage(props) {
     perPage: 10
   };
   const [pagination, setPagination] = useState(paginationState);
-
-  const [errorMessage, setError] = useState('');
-  const clearError = () => setError('');
 
   const fetchSuppliers = page => {
     const token = getToken();
@@ -34,7 +32,11 @@ function SuppliersPage(props) {
         const message = error.response
           ? error.response.data.message
           : 'Terjadi kesalahan, silahkan coba lagi';
-        setError(message);
+        toast.notify(({ onClose }) => (
+          <Alert color="danger" toggle={onClose}>
+            {message}
+          </Alert>
+        ));
       });
   };
   const changePage = page => {
@@ -46,18 +48,20 @@ function SuppliersPage(props) {
   }, []);
 
   const gotoItem = item => {
-    const {history} = props
-    history.push(`/suppliers/${item.id}`)
-  }
+    const { history } = props;
+    history.push(`/suppliers/${item.id}`);
+  };
 
   return (
     <div>
       <h2 className="mb-5">Supplier</h2>
-      <Alert color="danger" isOpen={!!errorMessage} toggle={clearError}>
-        {errorMessage}
-      </Alert>
 
-      <Button tag={Link} to="/suppliers/create" color="primary" className="mb-3">
+      <Button
+        tag={Link}
+        to="/suppliers/create"
+        color="primary"
+        className="mb-3"
+      >
         Tambah
       </Button>
 
