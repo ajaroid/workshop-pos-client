@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import DashboardPage from './dashboard/DashboardPage';
 import SuppliersPage from './supplier/SuppliersPage';
 import SupplierCreatePage from './supplier/SupplierCreatePage';
+import SupplierEditPage from './supplier/SupplierEditPage';
 
 function ProtectedPage(props) {
   const { history } = props;
@@ -19,6 +20,7 @@ function ProtectedPage(props) {
     <Layout {...props}>
       <Switch>
         <Route path="/suppliers/create" component={SupplierCreatePage} />
+        <Route path="/suppliers/:supplierId" component={SupplierEditPage} />
         <Route path="/suppliers" component={SuppliersPage} />
         <Route exact path="/" component={DashboardPage} />
         <Redirect to="/" />
