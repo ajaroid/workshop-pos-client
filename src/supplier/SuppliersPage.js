@@ -3,7 +3,7 @@ import { Alert, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PaginationComponent from 'react-reactstrap-pagination';
 import SupplierList from './components/SupplierList';
-import { getToken } from '../auth/utils';
+import { getToken } from '../utils';
 import { getSuppliers } from './api';
 import toast from 'toasted-notes';
 

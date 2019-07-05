@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { postSupplier } from './api';
-import { getToken } from '../auth/utils';
+import { getToken } from '../utils';
 import toast from 'toasted-notes';
 
 function SupplierCreatePage(props) {

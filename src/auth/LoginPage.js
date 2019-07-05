@@ -13,7 +13,7 @@ import {
 import toast from 'toasted-notes';
 
 import { login } from './api';
-import { saveToken } from './utils';
+import { saveToken } from '../utils';
 
 function LoginPage(props) {
   const { history } = props;

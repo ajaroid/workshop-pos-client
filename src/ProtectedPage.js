@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { getToken } from './auth/utils';
+import { getToken } from './utils';
 import Layout from './Layout';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DashboardPage from './dashboard/DashboardPage';

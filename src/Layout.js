@@ -1,5 +1,5 @@
 import React from 'react';
-import { clearToken, getToken } from './auth/utils';
+import { clearToken, getToken } from './utils';
 import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { logout } from './auth/api';
