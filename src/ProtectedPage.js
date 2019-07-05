@@ -15,6 +15,9 @@ import ProductsPage from './product/ProductsPage';
 import ProductCreatePage from './product/ProductCreatePage';
 import ProductEditPage from './product/ProductEditPage';
 
+import PurchasesPage from './purchase/PurchasesPage';
+import PurchaseCreatePage from './purchase/PurchaseCreatePage';
+
 function ProtectedPage(props) {
   const { history } = props;
   useEffect(() => {
@@ -27,6 +30,9 @@ function ProtectedPage(props) {
   return (
     <Layout {...props}>
       <Switch>
+        <Route path="/purchases/create" component={PurchaseCreatePage} />
+        <Route path="/purchases" component={PurchasesPage} />
+
         <Route path="/products/create" component={ProductCreatePage} />
         <Route path="/products/:productId" component={ProductEditPage} />
         <Route path="/products" component={ProductsPage} />

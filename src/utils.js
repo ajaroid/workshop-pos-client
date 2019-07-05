@@ -42,3 +42,7 @@ export function handleError(axiosError) {
     ));
   }
 }
+
+export function formatMoney(amount) {
+  return new Intl.NumberFormat('id').format(amount);
+}
